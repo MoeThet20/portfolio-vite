@@ -3,6 +3,26 @@ import { vi, beforeEach, afterEach } from 'vitest'
 import { cleanup } from '@testing-library/react'
 import React from 'react'
 
+// Ensure cleanup after each test
+beforeEach(() => {
+  // Clear all mocks and reset DOM
+  vi.clearAllMocks()
+  
+  // Ensure we have a clean DOM container
+  if (!document.body) {
+    document.body = document.createElement('body')
+  }
+  document.body.innerHTML = '<div id="root"></div>'
+})
+
+afterEach(() => {
+  cleanup()
+  // Clear any remaining DOM elements but keep body
+  if (document.body) {
+    document.body.innerHTML = '<div id="root"></div>'
+  }
+})
+
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
   constructor() {}

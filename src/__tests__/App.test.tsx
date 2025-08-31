@@ -19,6 +19,10 @@ vi.mock('../components/About', () => ({
   default: () => <section data-testid="about">About Section</section>
 }))
 
+vi.mock('../components/Skills', () => ({
+  default: () => <section data-testid="skills">Skills Section</section>
+}))
+
 vi.mock('../components/Projects', () => ({
   default: () => <section data-testid="projects">Projects Section</section>
 }))
@@ -40,6 +44,7 @@ describe('App Component', () => {
     expect(screen.getByTestId('header')).toBeInTheDocument()
     expect(screen.getByTestId('hero')).toBeInTheDocument()
     expect(screen.getByTestId('about')).toBeInTheDocument()
+    expect(screen.getByTestId('skills')).toBeInTheDocument()
     expect(screen.getByTestId('projects')).toBeInTheDocument()
     expect(screen.getByTestId('contact')).toBeInTheDocument()
   })
@@ -74,6 +79,7 @@ describe('App Component', () => {
     const sections = [
       screen.getByTestId('hero'),
       screen.getByTestId('about'),
+      screen.getByTestId('skills'),
       screen.getByTestId('projects'),
       screen.getByTestId('contact')
     ]

@@ -13,6 +13,7 @@ describe('Header Component', () => {
     render(<Header />)
     expect(screen.getByText('Home')).toBeInTheDocument()
     expect(screen.getByText('About')).toBeInTheDocument()
+    expect(screen.getByText('Skills')).toBeInTheDocument()
     expect(screen.getByText('Projects')).toBeInTheDocument()
     expect(screen.getByText('Contact')).toBeInTheDocument()
   })
@@ -66,6 +67,9 @@ describe('Header Component', () => {
     
     const aboutLink = screen.getByRole('link', { name: 'About' })
     expect(aboutLink).toHaveAttribute('href', '#about')
+    
+    const skillsLink = screen.getByRole('link', { name: 'Skills' })
+    expect(skillsLink).toHaveAttribute('href', '#skills')
     
     const projectsLink = screen.getByRole('link', { name: 'Projects' })
     expect(projectsLink).toHaveAttribute('href', '#projects')

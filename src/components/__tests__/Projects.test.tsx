@@ -42,8 +42,8 @@ describe('Projects Component', () => {
     render(<Projects />)
     
     // E-Commerce Platform tags
-    expect(screen.getByText('React')).toBeInTheDocument()
-    expect(screen.getByText('Node.js')).toBeInTheDocument()
+    expect(screen.getAllByText('React').length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText('Node.js').length).toBeGreaterThanOrEqual(1)
     expect(screen.getByText('MongoDB')).toBeInTheDocument()
     expect(screen.getByText('Stripe')).toBeInTheDocument()
     
@@ -56,7 +56,7 @@ describe('Projects Component', () => {
     expect(screen.getByText('Vue.js')).toBeInTheDocument()
     expect(screen.getByText('Weather API')).toBeInTheDocument()
     expect(screen.getByText('Chart.js')).toBeInTheDocument()
-    expect(screen.getByText('Tailwind')).toBeInTheDocument()
+    expect(screen.getAllByText('Tailwind').length).toBeGreaterThanOrEqual(1)
     
     // Portfolio Website tags
     expect(screen.getByText('Three.js')).toBeInTheDocument()

@@ -17,5 +17,10 @@ export default defineConfig({
     setupFiles: './src/test/setup.ts',
     css: true,
     pool: 'forks',
+    environmentOptions: {
+      jsdom: {
+        resources: 'usable',
+      },
+    },
   },
 })
