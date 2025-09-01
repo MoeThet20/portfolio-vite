@@ -12,14 +12,12 @@ export default function Header() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const closeMenu = () => setIsMenuOpen(false);
-
   const scrollToSection = (sectionId: string) => {
     console.log("Scrolling to section:", sectionId);
-    
+
     // Close menu first
     setIsMenuOpen(false);
-    
+
     // Wait for menu to close, then scroll
     setTimeout(() => {
       const element = document.getElementById(sectionId);
@@ -27,9 +25,10 @@ export default function Header() {
 
       if (element) {
         const headerHeight = 100; // Fixed header height when menu is closed
-        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const elementPosition =
+          element.getBoundingClientRect().top + window.scrollY;
         const offsetPosition = elementPosition - headerHeight;
-        
+
         console.log("Element position:", elementPosition);
         console.log("Offset position:", offsetPosition);
 
