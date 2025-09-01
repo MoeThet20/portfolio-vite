@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Contact from '../Contact'
 
 
@@ -128,7 +128,7 @@ describe('Contact Component', () => {
   })
 
   it('has proper form accessibility', () => {
-    const { container } = render(<Contact />)
+    render(<Contact />)
     
     const nameInput = screen.getByPlaceholderText('Your name')
     expect(nameInput).toHaveAttribute('type', 'text')

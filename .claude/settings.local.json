@@ -11,7 +11,8 @@
       "mcp__ide__getDiagnostics",
       "Bash(grep:*)",
       "Bash(npm uninstall:*)",
-      "Bash(npm run test:run:*)"
+      "Bash(npm run test:run:*)",
+      "Bash(cd:*)"
     ],
     "deny": [],
     "ask": []

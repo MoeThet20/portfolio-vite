@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '../../test/test-utils'
 import Hero from '../Hero'
 
@@ -42,7 +42,7 @@ describe('Hero Component', () => {
   it('scrolls to projects section when "View Projects" is clicked', () => {
     // Mock getElementById
     const mockElement = { scrollIntoView: mockScrollIntoView }
-    vi.spyOn(document, 'getElementById').mockReturnValue(mockElement as any)
+    vi.spyOn(document, 'getElementById').mockReturnValue(mockElement as unknown as HTMLElement)
 
     render(<Hero />)
     const viewProjectsButton = screen.getByRole('button', { name: 'View Projects' })

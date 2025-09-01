@@ -25,11 +25,16 @@ afterEach(() => {
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
+  root = null
+  rootMargin = ''
+  thresholds = []
+  
   constructor() {}
   disconnect() {}
   observe() {}
   unobserve() {}
-}
+  takeRecords() { return [] }
+} as typeof IntersectionObserver
 
 // Mock ResizeObserver
 global.ResizeObserver = class ResizeObserver {
@@ -95,17 +100,27 @@ HTMLCanvasElement.prototype.getContext = vi.fn().mockReturnValue({
 })
 
 // Helper function to filter out animation props
-const filterProps = (props: any) => {
+const filterProps = (props: Record<string, unknown>) => {
   const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     initial,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     animate,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     whileInView,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     whileHover,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     whileTap,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     whileFocus,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     transition,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     variants,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     custom,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     viewport,
     ...filteredProps
   } = props
@@ -115,13 +130,13 @@ const filterProps = (props: any) => {
 // Mock framer-motion globally
 vi.mock('framer-motion', () => ({
   motion: new Proxy({}, {
-    get: (target, prop) => {
-      return ({ children, ...props }: any) => {
+    get: (_target, prop) => {
+      return ({ children, ...props }: { children?: React.ReactNode; [key: string]: unknown }) => {
         const Tag = prop as string
         const filteredProps = filterProps(props)
         return React.createElement(Tag, filteredProps, children)
       }
     }
   }),
-  AnimatePresence: ({ children }: any) => children,
+  AnimatePresence: ({ children }: { children?: React.ReactNode }) => children,
 }))
