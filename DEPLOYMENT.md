@@ -5,17 +5,9 @@ This project is configured for automatic deployment to Vercel using GitHub Actio
 ## Setup Instructions
 
 ### 1. Vercel Project Setup
-1. Create a new project on [Vercel](https://vercel.com)
-2. Import your GitHub repository
-3. Configure the project settings:
-   - **Framework Preset**: Vite
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-   - **Install Command**: `npm install`
 
-### 2. Get Vercel Credentials
-Run the following commands locally to get your credentials:
-
+#### Option A: Link Existing Project
+If you already have a Vercel project:
 ```bash
 # Install Vercel CLI
 npm i -g vercel
@@ -25,12 +17,26 @@ vercel login
 
 # Link your project (run this in your project directory)
 vercel link
-
-# Get your credentials
-vercel env ls
 ```
 
-This will create a `.vercel` folder with a `project.json` file containing your `orgId` and `projectId`.
+#### Option B: Create New Project
+1. Create a new project on [Vercel](https://vercel.com)
+2. Import your GitHub repository
+3. Configure the project settings:
+   - **Framework Preset**: Vite
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
+
+### 2. Get Vercel Credentials
+After linking your project, get your credentials:
+
+```bash
+# Check your project configuration
+cat .vercel/project.json
+
+# This file contains your orgId and projectId
+```
 
 ### 3. GitHub Secrets Setup
 Add these secrets to your GitHub repository (Settings → Secrets and variables → Actions):
