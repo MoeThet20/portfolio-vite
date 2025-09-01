@@ -16,14 +16,19 @@ type ContactFormData = {
 };
 
 // Create Zod schema for form validation
-const createContactSchema = (t: any) =>
+const createContactSchema = (
+  t: (key: string, options?: Record<string, unknown>) => string
+) =>
   z.object({
     name: z
       .string()
       .min(1, t("contact.form.validation.nameRequired"))
-      .min(VALIDATION_RULES.MIN_NAME_LENGTH, t("contact.form.validation.nameMinLength", {
-        min: VALIDATION_RULES.MIN_NAME_LENGTH,
-      })),
+      .min(
+        VALIDATION_RULES.MIN_NAME_LENGTH,
+        t("contact.form.validation.nameMinLength", {
+          min: VALIDATION_RULES.MIN_NAME_LENGTH,
+        })
+      ),
     email: z
       .string()
       .min(1, t("contact.form.validation.emailRequired"))
@@ -31,12 +36,18 @@ const createContactSchema = (t: any) =>
     message: z
       .string()
       .min(1, t("contact.form.validation.messageRequired"))
-      .min(VALIDATION_RULES.MIN_MESSAGE_LENGTH, t("contact.form.validation.messageMinLength", {
-        min: VALIDATION_RULES.MIN_MESSAGE_LENGTH,
-      }))
-      .max(VALIDATION_RULES.MAX_MESSAGE_LENGTH, t("contact.form.validation.messageMaxLength", {
-        max: VALIDATION_RULES.MAX_MESSAGE_LENGTH,
-      })),
+      .min(
+        VALIDATION_RULES.MIN_MESSAGE_LENGTH,
+        t("contact.form.validation.messageMinLength", {
+          min: VALIDATION_RULES.MIN_MESSAGE_LENGTH,
+        })
+      )
+      .max(
+        VALIDATION_RULES.MAX_MESSAGE_LENGTH,
+        t("contact.form.validation.messageMaxLength", {
+          max: VALIDATION_RULES.MAX_MESSAGE_LENGTH,
+        })
+      ),
   });
 
 export default function Contact() {
@@ -65,9 +76,9 @@ export default function Contact() {
 
   // Auto-reset form and hide success message after 5 seconds
   useEffect(() => {
-    if (submitStatus === 'success') {
+    if (submitStatus === "success") {
       const timer = setTimeout(() => {
-        setSubmitStatus('idle');
+        setSubmitStatus("idle");
       }, 5000); // Hide success message after 5 seconds
 
       return () => clearTimeout(timer);
@@ -162,19 +173,12 @@ export default function Contact() {
 
       console.log("Email sent successfully:", result);
       setSubmitStatus("success");
-      
-      // Reset form immediately after successful submission
+
+      // Use reset with explicit default values to ensure proper clearing
       reset({
         name: "",
         email: "",
-        message: ""
-      }, {
-        keepErrors: false,
-        keepDirty: false,
-        keepIsSubmitted: false,
-        keepTouched: false,
-        keepIsValid: false,
-        keepSubmitCount: false
+        message: "",
       });
     } catch (error) {
       console.error("Email send failed:", error);
@@ -419,39 +423,15 @@ export default function Contact() {
             )}
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {formFields.map((field, index) => (
-                <motion.div
-                  key={field.name}
-                  initial={{ opacity: 0, x: 30, y: 20 }}
-                  whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: 0.4 + index * 0.1,
-                    duration: 0.6,
-                    type: "spring",
-                  }}
-                >
-                  <motion.label
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + index * 0.1, duration: 0.4 }}
-                    className="block text-slate-300 mb-2 text-sm sm:text-base"
-                  >
+              {formFields.map((field) => (
+                <div key={field.name}>
+                  <label className="block text-slate-300 mb-2 text-sm sm:text-base">
                     {field.label}
-                  </motion.label>
+                  </label>
                   {field.type === "textarea" ? (
-                    <motion.textarea
+                    <textarea
                       {...register(field.name as keyof ContactFormData)}
                       rows={5}
-                      initial={{ scale: 0.95, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
-                      whileFocus={{
-                        scale: 1.02,
-                        transition: { duration: 0.3 },
-                      }}
                       className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-700 border rounded-lg text-white focus:outline-none transition-all duration-300 resize-none text-sm sm:text-base ${
                         errors[field.name as keyof ContactFormData]
                           ? "border-red-500 focus:border-red-400"
@@ -460,17 +440,9 @@ export default function Contact() {
                       placeholder={field.placeholder}
                     />
                   ) : (
-                    <motion.input
+                    <input
                       {...register(field.name as keyof ContactFormData)}
                       type={field.type}
-                      initial={{ scale: 0.95, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
-                      whileFocus={{
-                        scale: 1.02,
-                        transition: { duration: 0.3 },
-                      }}
                       className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-700 border rounded-lg text-white focus:outline-none transition-all duration-300 text-sm sm:text-base ${
                         errors[field.name as keyof ContactFormData]
                           ? "border-red-500 focus:border-red-400"
@@ -480,41 +452,24 @@ export default function Contact() {
                     />
                   )}
                   {errors[field.name as keyof ContactFormData] && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mt-2 text-red-400 text-xs sm:text-sm"
-                    >
+                    <p className="mt-2 text-red-400 text-xs sm:text-sm">
                       {errors[field.name as keyof ContactFormData]?.message}
-                    </motion.p>
+                    </p>
                   )}
-                </motion.div>
+                </div>
               ))}
 
-              <motion.button
+              <button
                 type="submit"
                 disabled={isSubmitting}
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8, duration: 0.6, type: "spring" }}
-                whileHover={{
-                  scale: isSubmitting ? 1 : 1.05,
-                  y: isSubmitting ? 0 : -2,
-                  boxShadow: isSubmitting
-                    ? "none"
-                    : "0 10px 25px -5px rgba(100, 255, 218, 0.4)",
-                  transition: { duration: 0.3 },
-                }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                 className={`w-full px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base ${
                   isSubmitting
                     ? "opacity-50 cursor-not-allowed"
-                    : "hover:opacity-90"
+                    : "hover:opacity-90 hover:shadow-lg"
                 }`}
               >
                 {isSubmitting ? t("common.loading") : t("contact.form.submit")}
-              </motion.button>
+              </button>
             </form>
           </motion.div>
         </div>
