@@ -1,0 +1,359 @@
+{
+  "personal": {
+    "name": "Zaw Moe Thet",
+    "fullName": "Zaw Moe Thet",
+    "firstName": "Hello, I'm ",
+    "title": "Software Engineer",
+    "cvFileName": "Zaw-Moe-Thet-CV.pdf",
+    "personalCvFileName": "Zaw-Moe-Thet-CV.pdf",
+    "email": "mrzawmoethet@gmail.com"
+  },
+  "hero": {
+    "greeting": "Hello, I'm ",
+    "name": "Zaw Moe Thet",
+    "description": {
+      "part1": "Full-stack developer passionate about creating beautiful,",
+      "part2": "functional web experiences with modern technologies."
+    },
+    "buttons": {
+      "viewProjects": "View Projects",
+      "downloadCV": "Download CV"
+    },
+    "technologies": [
+      "React",
+      "React Native",
+      "Angular",
+      "Spring Boot",
+      "Node.js",
+      "AWS",
+      "Azure",
+      "Digital Ocean",
+      "Docker",
+      "MongoDB",
+      "Mssql",
+      "Git"
+    ]
+  },
+  "about": {
+    "title": "About Me",
+    "description": "Experienced Software Engineer with 5 years of expertise in building scalable web and mobile applications using Next.js, React, React Native, Angular, Node.js, and Spring Boot. Skilled in cloud platforms (AWS, Azure, DigitalOcean) and databases (MongoDB, MSSQL), with a strong focus on delivering efficient, reliable, and innovative software solutions.",
+    "skills": [
+      {
+        "name": "Frontend Development",
+        "description": "React/Nextjs, React Native, Angular, TypeScript, Tailwind CSS"
+      },
+      {
+        "name": "Backend Development",
+        "description": "Node.js, Express, Spring Boot"
+      },
+      {
+        "name": "Web Technologies",
+        "description": "HTML5, CSS3, JavaScript ES6+"
+      },
+      {
+        "name": "Mobile Development",
+        "description": "React Native, Expo"
+      }
+    ],
+    "journey": {
+      "title": "My Journey",
+      "description": "I began my software development journey 5 years ago with a strong curiosity for creating digital solutions that make life easier. Starting with front-end technologies like React and Next.js, I gradually expanded into full-stack development, mastering React Native for mobile, Node.js and Spring Boot for backend, and working across both monolithic and microservices architectures.Over the years, I've built and deployed applications on cloud platforms including AWS, Azure, and DigitalOcean, while managing databases such as MongoDB and MSSQL. My journey has been about continuous learning, embracing new challenges, and adapting to different environments from startups to enterprise projects."
+    }
+  },
+  "skills": {
+    "title": "Skills & Expertise",
+    "description": "A comprehensive overview of my technical skills and proficiency levels across various technologies and frameworks.",
+    "categories": [
+      {
+        "category": "Frontend Development",
+        "skills": [
+          {
+            "name": "React/Next.js",
+            "level": 95
+          },
+          {
+            "name": "TypeScript",
+            "level": 90
+          },
+          {
+            "name": "JavaScript (ES6+)",
+            "level": 95
+          },
+          {
+            "name": "HTML5/CSS3",
+            "level": 98
+          },
+          {
+            "name": "Tailwind CSS",
+            "level": 92
+          }
+        ]
+      },
+      {
+        "category": "Backend Development",
+        "skills": [
+          {
+            "name": "Node.js",
+            "level": 88
+          },
+          {
+            "name": "Express.js",
+            "level": 90
+          },
+          {
+            "name": "Spring Boot",
+            "level": 75
+          },
+          {
+            "name": "REST APIs",
+            "level": 92
+          },
+          {
+            "name": "Microservices",
+            "level": 75
+          }
+        ]
+      },
+      {
+        "category": "Database & Storage",
+        "skills": [
+          {
+            "name": "MongoDB",
+            "level": 85
+          },
+          {
+            "name": "MSSQL",
+            "level": 82
+          },
+          {
+            "name": "Redis",
+            "level": 80
+          },
+          {
+            "name": "Firebase",
+            "level": 85
+          }
+        ]
+      },
+      {
+        "category": "DevOps & Cloud",
+        "skills": [
+          {
+            "name": "Docker",
+            "level": 85
+          },
+          {
+            "name": "AWS",
+            "level": 82
+          },
+          {
+            "name": "Azure",
+            "level": 80
+          },
+          {
+            "name": "DigitalOcean",
+            "level": 78
+          },
+          {
+            "name": "GitHub Actions",
+            "level": 80
+          },
+          {
+            "name": "CI/CD",
+            "level": 60
+          }
+        ]
+      },
+      {
+        "category": "Tools & Workflow",
+        "skills": [
+          {
+            "name": "Git/GitHub",
+            "level": 95
+          },
+          {
+            "name": "VS Code",
+            "level": 98
+          },
+          {
+            "name": "ESLint/Prettier",
+            "level": 90
+          },
+          {
+            "name": "Figma",
+            "level": 80
+          }
+        ]
+      },
+      {
+        "category": "Mobile & Cross-Platform",
+        "skills": [
+          {
+            "name": "React Native",
+            "level": 88
+          },
+          {
+            "name": "Expo",
+            "level": 85
+          },
+          {
+            "name": "PWA",
+            "level": 85
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "experience": {
+        "value": "5+",
+        "label": "Years Experience",
+        "color": "cyan"
+      },
+      "projects": {
+        "value": "20+",
+        "label": "Projects Completed",
+        "color": "purple"
+      },
+      "technologies": {
+        "value": "30+",
+        "label": "Technologies Used",
+        "color": "green"
+      },
+      "learning": {
+        "value": "24/7",
+        "label": "Learning Mode",
+        "color": "orange"
+      }
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Here are some of my recent projects that showcase my skills and passion for development.",
+    "items": [
+      {
+        "title": "E-Commerce Platform",
+        "description": "Full-stack e-commerce solution with React, Node.js, and Stripe integration.",
+        "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
+        "technologies": [
+          "React",
+          "Node.js",
+          "MongoDB",
+          "Stripe"
+        ],
+        "github": "#",
+        "live": "#"
+      },
+      {
+        "title": "Task Management App",
+        "description": "Collaborative task management with real-time updates and team features.",
+        "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop",
+        "technologies": [
+          "React",
+          "TypeScript",
+          "Socket.io",
+          "PostgreSQL"
+        ],
+        "github": "#",
+        "live": "#"
+      },
+      {
+        "title": "Weather Dashboard",
+        "description": "Beautiful weather app with forecasts and interactive maps.",
+        "image": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=500&h=300&fit=crop",
+        "technologies": [
+          "Vue.js",
+          "Weather API",
+          "Chart.js",
+          "Tailwind"
+        ],
+        "github": "#",
+        "live": "#"
+      },
+      {
+        "title": "Portfolio Website",
+        "description": "Interactive portfolio with Three.js animations and modern design.",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop",
+        "technologies": [
+          "React",
+          "Three.js",
+          "Framer Motion",
+          "Tailwind"
+        ],
+        "github": "#",
+        "live": "#"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "Ready to work together?",
+    "description2": "Let's create something amazing!",
+    "info": {
+      "title": "Let's Connect",
+      "email": "mrzawmoethet@gmail.com",
+      "phone": "+65 84898327",
+      "location": "Singapore"
+    },
+    "form": {
+      "title": "Send Message",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "text",
+          "placeholder": "Your name"
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "placeholder": "your.email@example.com"
+        },
+        {
+          "name": "message",
+          "label": "Message",
+          "type": "textarea",
+          "placeholder": "Tell me about your project..."
+        }
+      ],
+      "submit": "Send Message",
+      "success": "Thank you! Your message has been sent successfully.",
+      "error": "Sorry, there was an error sending your message. Please try again."
+    },
+    "social": {
+      "title": "Follow Me",
+      "resumeButton": "Download Resume",
+      "links": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/MoeThet20",
+          "iconPath": "M12 2c5.514 0 10 4.486 10 10 0 4.411-2.865 8.147-6.839 9.465-.5.092-.682-.217-.682-.483 0-.237.008-.868.013-1.703 2.782.605 3.369-1.343 3.369-1.343.454-1.158 1.11-1.466 1.11-1.466.908-.62-.069-.608-.069-.608-1.003.07-1.531 1.032-1.531 1.032-.892 1.53-2.341 1.088-2.91.832-.092-.647-.35-1.088-.636-1.338 2.22-.253 4.555-1.113 4.555-4.951 0-1.093-.39-1.988-1.029-2.688.103-.253.446-1.272-.098-2.65 0 0-.84-.27-2.75 1.026A9.564 9.564 0 0112 6.844c-.85.004-1.705.115-2.504.337-1.909-1.296-2.747-1.027-2.747-1.027-.546 1.379-.202 2.398-.1 2.651-.64.7-1.028 1.595-1.028 2.688 0 3.848 2.339 4.695 4.566 4.943-.288.248-.546.73-.546 1.467 0 1.061-.01 1.917-.01 2.176 0 .269-.18.579-.688.481C4.865 20.147 2 16.411 2 12 2 6.486 6.486 2 12 2z"
+        },
+        {
+          "name": "LinkedIn",
+          "url": "https://www.linkedin.com/in/zaw-moe-thet-react/",
+          "iconPath": "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+        }
+      ]
+    },
+    "emailjs": {
+      "serviceId": "service_5my9t1e",
+      "templateId": "template_9ibwldk",
+      "publicKey": "J-wh23WiHvcI87QLI",
+      "toEmail": "mrzawmoethet@gmail.com"
+    }
+  },
+  "navigation": {
+    "scrollToSections": {
+      "projects": "projects",
+      "about": "about"
+    }
+  },
+  "common": {
+    "loading": "Sending...",
+    "actions": {
+      "viewCode": "Code",
+      "viewLive": "Live Demo"
+    }
+  }
+}

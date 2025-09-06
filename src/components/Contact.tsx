@@ -7,6 +7,7 @@ import { z } from "zod";
 import emailjs from "@emailjs/browser";
 import { useTranslation } from "react-i18next";
 import { VALIDATION_RULES } from "../constants";
+import content from "@/data/content.json";
 
 // Define the form data type
 type ContactFormData = {
@@ -88,67 +89,33 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      label: t("contact.info.labels.email"),
-      value: t("contact.info.email"),
+      label: "Email",
+      value: content.contact.info.email,
     },
     {
       icon: Phone,
-      label: t("contact.info.labels.phone"),
-      value: t("contact.info.phone"),
+      label: "Phone",
+      value: content.contact.info.phone,
     },
     {
       icon: MapPin,
-      label: t("contact.info.labels.location"),
-      value: t("contact.info.location"),
+      label: "Location",
+      value: content.contact.info.location,
     },
   ];
 
-  const socialLinks = [
-    {
-      href: "#",
-      label: "GitHub",
-      iconPath:
-        "M12 2c5.514 0 10 4.486 10 10 0 4.411-2.865 8.147-6.839 9.465-.5.092-.682-.217-.682-.483 0-.237.008-.868.013-1.703 2.782.605 3.369-1.343 3.369-1.343.454-1.158 1.11-1.466 1.11-1.466.908-.62-.069-.608-.069-.608-1.003.07-1.531 1.032-1.531 1.032-.892 1.53-2.341 1.088-2.91.832-.092-.647-.35-1.088-.636-1.338 2.22-.253 4.555-1.113 4.555-4.951 0-1.093-.39-1.988-1.029-2.688.103-.253.446-1.272-.098-2.65 0 0-.84-.27-2.75 1.026A9.564 9.564 0 0112 6.844c-.85.004-1.705.115-2.504.337-1.909-1.296-2.747-1.027-2.747-1.027-.546 1.379-.202 2.398-.1 2.651-.64.7-1.028 1.595-1.028 2.688 0 3.848 2.339 4.695 4.566 4.943-.288.248-.546.73-.546 1.467 0 1.061-.01 1.917-.01 2.176 0 .269-.18.579-.688.481C4.865 20.147 2 16.411 2 12 2 6.486 6.486 2 12 2z",
-    },
-    {
-      href: "#",
-      label: "LinkedIn",
-      iconPath:
-        "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
-    },
-    {
-      href: "#",
-      label: "Twitter",
-      iconPath:
-        "M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z",
-    },
-  ];
+  const socialLinks = content.contact.social.links.map((link) => ({
+    href: link.url,
+    label: link.name,
+    iconPath: link.iconPath,
+  }));
 
-  const formFields = [
-    {
-      name: "name",
-      label: t("contact.form.name.label"),
-      type: "text",
-      placeholder: t("contact.form.name.placeholder"),
-    },
-    {
-      name: "email",
-      label: t("contact.form.email.label"),
-      type: "text",
-      placeholder: t("contact.form.email.placeholder"),
-    },
-    {
-      name: "message",
-      label: t("contact.form.message.label"),
-      type: "textarea",
-      placeholder: t("contact.form.message.placeholder"),
-    },
-  ];
+  const formFields = content.contact.form.fields;
 
   const downloadCV = () => {
     const link = document.createElement("a");
     link.href = "/cv-resume.pdf";
-    link.download = "Zaw-Moe-Thet-CV.pdf";
+    link.download = content.personal.personalCvFileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -160,15 +127,15 @@ export default function Contact() {
     try {
       // EmailJS configuration
       const result = await emailjs.send(
-        "service_5my9t1e",
-        "template_9ibwldk",
+        content.contact.emailjs.serviceId,
+        content.contact.emailjs.templateId,
         {
           from_name: data.name,
           from_email: data.email,
           message: data.message,
-          to_email: "mrzawmoethet@gmail.com",
+          to_email: content.contact.emailjs.toEmail,
         },
-        "J-wh23WiHvcI87QLI"
+        content.contact.emailjs.publicKey
       );
 
       console.log("Email sent successfully:", result);
@@ -212,36 +179,39 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="min-h-screen py-16 sm:py-20 relative">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section
+      id="contact"
+      className="relative min-h-screen py-12 xs:py-16 sm:py-20 lg:py-24"
+    >
+      <div className="container px-4 mx-auto xs:px-6 sm:px-8 lg:px-12 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: -60 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-12 sm:mb-16"
+          className="mb-8 text-center xs:mb-12 sm:mb-16 lg:mb-20"
         >
           <motion.h2
             initial={{ opacity: 0, x: -100, rotateZ: -5 }}
             whileInView={{ opacity: 1, x: 0, rotateZ: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6"
+            className="mb-3 text-2xl font-bold text-white xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl xs:mb-4 sm:mb-6 lg:mb-6"
           >
-            {t("contact.title")}
+            {content.contact.title}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, x: 100, rotateZ: 5 }}
             whileInView={{ opacity: 1, x: 0, rotateZ: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.8, type: "spring" }}
-            className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto px-4"
+            className="max-w-4xl px-2 mx-auto text-sm xs:text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl text-slate-300 xs:px-4"
           >
-            {t("contact.description")} {t("contact.description2")}
+            {content.contact.description} {content.contact.description2}
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xs:gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
           <motion.div
             initial={{ opacity: 0, x: -100, rotateY: -15 }}
             whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
@@ -253,9 +223,9 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8"
+              className="mb-4 text-xl font-bold text-white xs:text-2xl sm:text-2xl lg:text-3xl xl:text-3xl xs:mb-5 sm:mb-6 lg:mb-7"
             >
-              {t("contact.info.title")}
+              {content.contact.info.title}
             </motion.h3>
 
             <motion.div
@@ -263,7 +233,7 @@ export default function Contact() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="space-y-6"
+              className="space-y-4 xs:space-y-6 lg:space-y-8"
             >
               {contactInfo.map((info, index) => (
                 <motion.div
@@ -274,7 +244,7 @@ export default function Contact() {
                     scale: 1.02,
                     transition: { duration: 0.3 },
                   }}
-                  className="flex items-center space-x-4 cursor-pointer"
+                  className="flex items-center space-x-3 cursor-pointer xs:space-x-4"
                 >
                   <motion.div
                     initial={{ scale: 0, rotate: -180 }}
@@ -286,15 +256,15 @@ export default function Contact() {
                       type: "spring",
                     }}
                     whileHover={{ rotate: 5, scale: 1.1 }}
-                    className="w-10 sm:w-12 h-10 sm:h-12 bg-cyan-400/20 rounded-lg flex items-center justify-center flex-shrink-0"
+                    className="flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg xs:w-9 sm:w-10 lg:w-11 xl:w-12 xs:h-9 sm:h-10 lg:h-11 xl:h-12 bg-cyan-400/20"
                   >
-                    <info.icon className="w-5 sm:w-6 h-5 sm:h-6 text-cyan-400" />
+                    <info.icon className="w-4 h-4 xs:w-4 sm:w-5 lg:w-5 xl:w-6 xs:h-4 sm:h-5 lg:h-5 xl:h-6 text-cyan-400" />
                   </motion.div>
                   <div className="min-w-0">
-                    <p className="text-slate-400 text-xs sm:text-sm">
+                    <p className="text-xs text-slate-400 xs:text-xs sm:text-sm lg:text-sm xl:text-base">
                       {info.label}
                     </p>
-                    <p className="text-white font-semibold text-sm sm:text-base break-all">
+                    <p className="text-sm font-semibold text-white break-all xs:text-sm sm:text-base lg:text-base xl:text-lg">
                       {info.value}
                     </p>
                   </div>
@@ -314,17 +284,18 @@ export default function Contact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.9, duration: 0.5 }}
-                className="text-lg sm:text-xl font-semibold text-white mb-4"
+                className="mb-3 text-base font-semibold text-white xs:text-lg sm:text-xl lg:text-xl xl:text-2xl xs:mb-4 lg:mb-5"
               >
-                {t("contact.connect.title")}
+                {content.contact.social.title}
               </motion.h4>
 
-              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <div className="flex space-x-4">
                   {socialLinks.map((social, index) => (
                     <motion.a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
                       initial={{ opacity: 0, y: 30, scale: 0 }}
                       whileInView={{ opacity: 1, y: 0, scale: 1 }}
                       viewport={{ once: true }}
@@ -340,10 +311,10 @@ export default function Contact() {
                         transition: { duration: 0.3 },
                       }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-10 sm:w-12 h-10 sm:h-12 bg-slate-800 hover:bg-cyan-400 rounded-lg flex items-center justify-center transition-colors duration-300 group"
+                      className="flex items-center justify-center w-10 h-10 transition-colors duration-300 rounded-lg sm:w-12 sm:h-12 bg-slate-800 hover:bg-cyan-400 group"
                     >
                       <svg
-                        className="w-5 sm:w-6 h-5 sm:h-6 text-slate-300 group-hover:text-slate-900"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-slate-300 group-hover:text-slate-900"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                         aria-label={social.label}
@@ -367,10 +338,10 @@ export default function Contact() {
                   }}
                   whileTap={{ scale: 0.95 }}
                   onClick={downloadCV}
-                  className="flex items-center justify-center sm:justify-start space-x-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-semibold text-sm hover:opacity-90 transition-all duration-300 cursor-pointer w-full sm:w-auto"
+                  className="flex items-center justify-center xs:justify-start space-x-1.5 xs:space-x-2 px-3 xs:px-4 py-2 xs:py-2.5 lg:py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-semibold text-xs xs:text-sm lg:text-base hover:opacity-90 transition-all duration-300 cursor-pointer w-full xs:w-auto"
                 >
-                  <Download className="w-4 h-4" />
-                  <span>{t("contact.connect.resume")}</span>
+                  <Download className="w-3 h-3 xs:w-4 lg:w-5 xs:h-4 lg:h-5" />
+                  <span>{content.contact.social.resumeButton}</span>
                 </motion.button>
               </div>
             </motion.div>
@@ -386,26 +357,26 @@ export default function Contact() {
               boxShadow: "0 25px 50px -12px rgba(100, 255, 218, 0.25)",
               transition: { duration: 0.3 },
             }}
-            className="bg-slate-800/50 backdrop-blur-sm p-6 sm:p-8 rounded-lg border border-slate-700"
+            className="p-4 border rounded-lg bg-slate-800/50 backdrop-blur-sm xs:p-6 sm:p-8 lg:p-10 xl:p-12 border-slate-700"
           >
             <motion.h3
               initial={{ opacity: 0, y: -30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-2xl sm:text-3xl font-bold text-white mb-6"
+              className="mb-4 text-xl font-bold text-white xs:text-2xl sm:text-2xl lg:text-3xl xl:text-3xl xs:mb-5 lg:mb-6"
             >
-              {t("contact.form.title")}
+              {content.contact.form.title}
             </motion.h3>
 
             {submitStatus === "success" && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-green-500/20 border border-green-500/50 rounded-lg p-4 mb-6"
+                className="p-4 mb-6 border rounded-lg bg-green-500/20 border-green-500/50"
               >
-                <p className="text-green-400 text-sm">
-                  {t("contact.form.success")}
+                <p className="text-sm text-green-400">
+                  {content.contact.form.success}
                 </p>
               </motion.div>
             )}
@@ -414,25 +385,28 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 mb-6"
+                className="p-4 mb-6 border rounded-lg bg-red-500/20 border-red-500/50"
               >
-                <p className="text-red-400 text-sm">
-                  {t("contact.form.error")}
+                <p className="text-sm text-red-400">
+                  {content.contact.form.error}
                 </p>
               </motion.div>
             )}
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-4 xs:space-y-6 lg:space-y-8"
+            >
               {formFields.map((field) => (
                 <div key={field.name}>
-                  <label className="block text-slate-300 mb-2 text-sm sm:text-base">
+                  <label className="block text-slate-300 mb-1.5 xs:mb-2 text-xs xs:text-sm sm:text-sm lg:text-base">
                     {field.label}
                   </label>
                   {field.type === "textarea" ? (
                     <textarea
                       {...register(field.name as keyof ContactFormData)}
                       rows={5}
-                      className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-700 border rounded-lg text-white focus:outline-none transition-all duration-300 resize-none text-sm sm:text-base ${
+                      className={`w-full px-3 xs:px-4 py-2 xs:py-3 bg-slate-700 border rounded-lg text-white focus:outline-none transition-all duration-300 resize-none text-sm xs:text-sm sm:text-base lg:text-lg ${
                         errors[field.name as keyof ContactFormData]
                           ? "border-red-500 focus:border-red-400"
                           : "border-slate-600 focus:border-cyan-400"
@@ -443,7 +417,7 @@ export default function Contact() {
                     <input
                       {...register(field.name as keyof ContactFormData)}
                       type={field.type}
-                      className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-700 border rounded-lg text-white focus:outline-none transition-all duration-300 text-sm sm:text-base ${
+                      className={`w-full px-3 xs:px-4 py-2 xs:py-3 bg-slate-700 border rounded-lg text-white focus:outline-none transition-all duration-300 text-sm xs:text-sm sm:text-base lg:text-lg ${
                         errors[field.name as keyof ContactFormData]
                           ? "border-red-500 focus:border-red-400"
                           : "border-slate-600 focus:border-cyan-400"
@@ -452,7 +426,7 @@ export default function Contact() {
                     />
                   )}
                   {errors[field.name as keyof ContactFormData] && (
-                    <p className="mt-2 text-red-400 text-xs sm:text-sm">
+                    <p className="mt-1.5 xs:mt-2 text-red-400 text-xs xs:text-xs sm:text-sm lg:text-base">
                       {errors[field.name as keyof ContactFormData]?.message}
                     </p>
                   )}
@@ -462,13 +436,15 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full px-6 sm:px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base ${
+                className={`w-full px-4 xs:px-6 sm:px-7 py-2.5 xs:py-3 lg:py-3.5 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-lg font-semibold transition-all duration-300 text-sm xs:text-base lg:text-base ${
                   isSubmitting
                     ? "opacity-50 cursor-not-allowed"
                     : "hover:opacity-90 hover:shadow-lg"
                 }`}
               >
-                {isSubmitting ? t("common.loading") : t("contact.form.submit")}
+                {isSubmitting
+                  ? content.common.loading
+                  : content.contact.form.submit}
               </button>
             </form>
           </motion.div>

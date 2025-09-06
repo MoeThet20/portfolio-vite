@@ -145,7 +145,7 @@
     }
   },
   "footer": {
-    "copyright": "© {{year}} {{name}} Portfolio. Erstellt mit React, Three.js und Tailwind CSS."
+    "copyright": "© {{year}} {{name}}. Erstellt mit React, Three.js und Tailwind CSS."
   },
   "languages": {
     "en": "English",

@@ -7,82 +7,21 @@ import {
   GitBranch,
   Cloud
 } from 'lucide-react'
+import content from '@/data/content.json'
 
 export default function Skills() {
-  const skillCategories = [
-    {
-      category: 'Frontend Development',
-      icon: Code,
-      skills: [
-        { name: 'React/Next.js', level: 95 },
-        { name: 'TypeScript', level: 90 },
-        { name: 'JavaScript (ES6+)', level: 95 },
-        { name: 'HTML5/CSS3', level: 98 },
-        { name: 'Tailwind CSS', level: 92 },
-        { name: 'Sass/SCSS', level: 85 }
-      ]
-    },
-    {
-      category: 'Backend Development',
-      icon: Server,
-      skills: [
-        { name: 'Node.js', level: 88 },
-        { name: 'Express.js', level: 90 },
-        { name: 'Python', level: 85 },
-        { name: 'REST APIs', level: 92 },
-        { name: 'GraphQL', level: 80 },
-        { name: 'Microservices', level: 75 }
-      ]
-    },
-    {
-      category: 'Database & Storage',
-      icon: Database,
-      skills: [
-        { name: 'PostgreSQL', level: 88 },
-        { name: 'MongoDB', level: 85 },
-        { name: 'Redis', level: 80 },
-        { name: 'MySQL', level: 82 },
-        { name: 'Firebase', level: 85 },
-        { name: 'Supabase', level: 78 }
-      ]
-    },
-    {
-      category: 'DevOps & Cloud',
-      icon: Cloud,
-      skills: [
-        { name: 'Docker', level: 85 },
-        { name: 'AWS', level: 82 },
-        { name: 'Vercel', level: 90 },
-        { name: 'GitHub Actions', level: 80 },
-        { name: 'Nginx', level: 75 },
-        { name: 'Linux', level: 78 }
-      ]
-    },
-    {
-      category: 'Tools & Workflow',
-      icon: GitBranch,
-      skills: [
-        { name: 'Git/GitHub', level: 95 },
-        { name: 'VS Code', level: 98 },
-        { name: 'Webpack/Vite', level: 85 },
-        { name: 'Jest/Vitest', level: 88 },
-        { name: 'ESLint/Prettier', level: 90 },
-        { name: 'Figma', level: 80 }
-      ]
-    },
-    {
-      category: 'Mobile & Cross-Platform',
-      icon: Smartphone,
-      skills: [
-        { name: 'React Native', level: 82 },
-        { name: 'Flutter', level: 75 },
-        { name: 'PWA', level: 85 },
-        { name: 'Expo', level: 80 },
-        { name: 'Ionic', level: 70 },
-        { name: 'Cordova', level: 65 }
-      ]
-    }
-  ]
+  const categoryIcons = [Code, Server, Database, Cloud, GitBranch, Smartphone];
+  const skillCategories = content.skills.categories.map((category, index) => ({
+    ...category,
+    icon: categoryIcons[index]
+  }));
+
+  const summaryColors: { [key: string]: string } = {
+    cyan: 'text-cyan-400',
+    purple: 'text-purple-400', 
+    green: 'text-green-400',
+    orange: 'text-orange-400'
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -120,33 +59,32 @@ export default function Skills() {
   }
 
   return (
-    <section id="skills" className="min-h-screen py-16 sm:py-20 relative">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="skills" className="relative min-h-screen py-12 xs:py-16 sm:py-20 lg:py-24">
+      <div className="container px-4 mx-auto xs:px-6 sm:px-8 lg:px-12 xl:px-16">
         <motion.div 
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-12 sm:mb-16"
+          className="mb-8 text-center xs:mb-12 sm:mb-16 lg:mb-20"
         >
           <motion.h2 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6"
+            className="mb-3 text-2xl font-bold text-white xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl xs:mb-4 sm:mb-6 lg:mb-6"
           >
-            Skills & Expertise
+            {content.skills.title}
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto px-4"
+            className="max-w-4xl px-2 mx-auto text-sm xs:text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl text-slate-300 xs:px-4"
           >
-            A comprehensive overview of my technical skills and proficiency levels across 
-            various technologies and frameworks.
+            {content.skills.description}
           </motion.p>
         </motion.div>
 
@@ -155,7 +93,7 @@ export default function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8"
+          className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 xs:gap-6 sm:gap-8 lg:gap-6 xl:gap-8"
         >
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
@@ -165,32 +103,32 @@ export default function Skills() {
                 scale: 1.02,
                 transition: { duration: 0.3 }
               }}
-              className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-lg border border-slate-700 hover:border-cyan-400 transition-all duration-300"
+              className="p-4 transition-all duration-300 border rounded-lg bg-slate-800/50 backdrop-blur-sm xs:p-5 sm:p-6 lg:p-6 xl:p-7 border-slate-700 hover:border-cyan-400"
             >
-              <div className="flex items-center mb-6">
+              <div className="flex items-center mb-4 xs:mb-5 sm:mb-6">
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
                   whileInView={{ scale: 1, rotate: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: categoryIndex * 0.1 + 0.5, duration: 0.6, type: "spring" }}
                 >
-                  <category.icon className="w-8 h-8 text-cyan-400 mr-3" />
+                  <category.icon className="w-6 h-6 mr-2 xs:w-7 sm:w-8 lg:w-8 xl:w-9 xs:h-7 sm:h-8 lg:h-8 xl:h-9 text-cyan-400 xs:mr-3" />
                 </motion.div>
-                <h3 className="text-xl font-semibold text-white">{category.category}</h3>
+                <h3 className="text-base font-semibold text-white xs:text-lg sm:text-xl lg:text-xl xl:text-2xl">{category.category}</h3>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-3 xs:space-y-4">
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
                     variants={skillVariants}
                     className="space-y-2"
                   >
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium text-slate-300">{skill.name}</span>
-                      <span className="text-xs text-cyan-400 font-semibold">{skill.level}%</span>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium xs:text-sm sm:text-sm lg:text-base text-slate-300">{skill.name}</span>
+                      <span className="text-xs font-semibold xs:text-xs sm:text-xs lg:text-sm text-cyan-400">{skill.level}%</span>
                     </div>
-                    <div className="w-full bg-slate-700 rounded-full h-2">
+                    <div className="w-full h-2 rounded-full bg-slate-700">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
@@ -200,7 +138,7 @@ export default function Skills() {
                           duration: 1.2,
                           ease: "easeOut"
                         }}
-                        className="bg-gradient-to-r from-cyan-500 to-purple-500 h-2 rounded-full relative"
+                        className="relative h-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500"
                       >
                         <motion.div
                           animate={{ 
@@ -232,37 +170,21 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="mt-12 sm:mt-16 bg-gradient-to-r from-slate-800/30 to-slate-900/30 backdrop-blur-sm p-6 sm:p-8 rounded-lg border border-slate-700"
+          className="p-4 mt-8 border rounded-lg xs:mt-12 sm:mt-16 lg:mt-20 bg-gradient-to-r from-slate-800/30 to-slate-900/30 backdrop-blur-sm xs:p-6 sm:p-8 lg:p-10 border-slate-700"
         >
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="text-center"
-            >
-              <div className="text-3xl font-bold text-cyan-400 mb-2">5+</div>
-              <div className="text-slate-300 text-sm">Years Experience</div>
-            </motion.div>
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="text-center"
-            >
-              <div className="text-3xl font-bold text-purple-400 mb-2">50+</div>
-              <div className="text-slate-300 text-sm">Projects Completed</div>
-            </motion.div>
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="text-center"
-            >
-              <div className="text-3xl font-bold text-green-400 mb-2">30+</div>
-              <div className="text-slate-300 text-sm">Technologies Used</div>
-            </motion.div>
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="text-center"
-            >
-              <div className="text-3xl font-bold text-orange-400 mb-2">24/7</div>
-              <div className="text-slate-300 text-sm">Learning Mode</div>
-            </motion.div>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 xs:gap-6">
+            {Object.entries(content.skills.summary).map(([key, item]) => (
+              <motion.div 
+                key={key}
+                whileHover={{ scale: 1.05 }}
+                className="text-center"
+              >
+                <div className={`text-2xl xs:text-3xl lg:text-4xl font-bold ${summaryColors[item.color]} mb-1 xs:mb-2`}>
+                  {item.value}
+                </div>
+                <div className="text-xs text-slate-300 xs:text-sm lg:text-base">{item.label}</div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>

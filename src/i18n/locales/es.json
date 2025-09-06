@@ -145,7 +145,7 @@
     }
   },
   "footer": {
-    "copyright": "© {{year}} Portafolio de {{name}}. Construido con React, Three.js y Tailwind CSS."
+    "copyright": "© {{year}} {{name}}. Construido con React, Three.js y Tailwind CSS."
   },
   "languages": {
     "en": "English",

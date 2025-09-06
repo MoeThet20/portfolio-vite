@@ -145,7 +145,7 @@
     }
   },
   "footer": {
-    "copyright": "© {{year}} {{name}} ポートフォリオ。React、Three.js、Tailwind CSSで構築。"
+    "copyright": "© {{year}} {{name}}。React、Three.js、Tailwind CSSで構築。"
   },
   "languages": {
     "en": "English",

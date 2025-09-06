@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion'
 import { Code, Database, Globe, Smartphone } from 'lucide-react'
+import content from '@/data/content.json'
 
 export default function About() {
-  const skills = [
-    { icon: Code, name: 'Frontend Development', desc: 'React, TypeScript, Tailwind CSS' },
-    { icon: Database, name: 'Backend Development', desc: 'Node.js, Python, PostgreSQL' },
-    { icon: Globe, name: 'Web Technologies', desc: 'HTML5, CSS3, JavaScript ES6+' },
-    { icon: Smartphone, name: 'Mobile Development', desc: 'React Native, Flutter' }
-  ]
+  const skillIcons = [Code, Database, Globe, Smartphone];
+  const skills = content.about.skills.map((skill, index) => ({
+    ...skill,
+    icon: skillIcons[index]
+  }));
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -35,33 +35,32 @@ export default function About() {
   }
 
   return (
-    <section id="about" className="min-h-screen py-16 sm:py-20 relative">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="about" className="relative min-h-screen py-12 xs:py-16 sm:py-20 lg:py-24">
+      <div className="container px-4 mx-auto xs:px-6 sm:px-8 lg:px-12 xl:px-16">
         <motion.div 
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-12 sm:mb-16"
+          className="mb-8 text-center xs:mb-12 sm:mb-16 lg:mb-20"
         >
           <motion.h2 
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6"
+            className="mb-3 text-2xl font-bold text-white xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl xs:mb-4 sm:mb-6 lg:mb-6"
           >
-            About Me
+            {content.about.title}
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.8, type: "spring" }}
-            className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto px-4"
+            className="max-w-4xl px-2 mx-auto text-sm xs:text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl text-slate-300 xs:px-4"
           >
-            I'm a passionate developer with expertise in modern web technologies. 
-            I love creating innovative solutions and bringing ideas to life through code.
+            {content.about.description}
           </motion.p>
         </motion.div>
 
@@ -70,7 +69,7 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+          className="grid grid-cols-1 gap-4 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xs:gap-6 sm:gap-8 lg:gap-6 xl:gap-8"
         >
           {skills.map((skill, index) => (
             <motion.div
@@ -81,7 +80,7 @@ export default function About() {
                 x: 10,
                 transition: { duration: 0.3 }
               }}
-              className="bg-slate-800/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg border border-slate-700 hover:border-cyan-400 transition-colors duration-300"
+              className="p-4 transition-colors duration-300 border rounded-lg bg-slate-800/50 backdrop-blur-sm xs:p-5 sm:p-6 lg:p-6 xl:p-7 border-slate-700 hover:border-cyan-400"
             >
               <motion.div
                 initial={{ scale: 0, rotate: -180 }}
@@ -89,10 +88,10 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 + 0.5, duration: 0.6, type: "spring" }}
               >
-                <skill.icon className="w-10 sm:w-12 h-10 sm:h-12 text-cyan-400 mb-3 sm:mb-4" />
+                <skill.icon className="w-8 h-8 mb-2 xs:w-9 sm:w-10 lg:w-11 xl:w-12 xs:h-9 sm:h-10 lg:h-11 xl:h-12 text-cyan-400 xs:mb-3 sm:mb-3 lg:mb-4" />
               </motion.div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{skill.name}</h3>
-              <p className="text-sm sm:text-base text-slate-300">{skill.desc}</p>
+              <h3 className="mb-2 text-base font-semibold text-white xs:text-lg sm:text-xl lg:text-xl xl:text-2xl xs:mb-2 lg:mb-3">{skill.name}</h3>
+              <p className="text-xs xs:text-sm sm:text-sm lg:text-base xl:text-base text-slate-300">{skill.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -115,27 +114,25 @@ export default function About() {
             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
             transition: { duration: 0.3 }
           }}
-          className="mt-12 sm:mt-16 bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm p-6 sm:p-8 rounded-lg border border-slate-700"
+          className="p-4 mt-8 border rounded-lg xs:mt-12 sm:mt-16 lg:mt-20 xl:mt-24 bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm xs:p-6 sm:p-8 lg:p-10 xl:p-12 border-slate-700"
         >
           <motion.h3 
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-2xl sm:text-3xl font-bold text-white mb-4"
+            className="mb-3 text-xl font-bold text-white xs:text-2xl sm:text-2xl lg:text-3xl xl:text-3xl xs:mb-4 lg:mb-5"
           >
-            My Journey
+            {content.about.journey.title}
           </motion.h3>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="text-slate-300 text-base sm:text-lg leading-relaxed"
+            className="text-sm leading-relaxed text-slate-300 xs:text-base sm:text-base lg:text-lg xl:text-lg"
           >
-            With over 3 years of experience in web development, I've worked on diverse projects 
-            ranging from small business websites to large-scale applications. I'm constantly learning 
-            new technologies and staying up-to-date with industry trends to deliver cutting-edge solutions.
+            {content.about.journey.description}
           </motion.p>
         </motion.div>
       </div>
